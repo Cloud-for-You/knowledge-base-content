@@ -1,5 +1,5 @@
 +++
-Title = "Clarity Docs"
+Title = "OpenShift"
 weight = 10
 +++
 

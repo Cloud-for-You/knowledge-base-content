@@ -1,5 +1,5 @@
 +++
-title = "Compose Docs"
+title = "Kubernetes"
 weight = 1
 +++
 
