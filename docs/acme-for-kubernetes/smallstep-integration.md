@@ -5,7 +5,7 @@ weight=3
 
 ### Postup pro vydání certifikátu
 
-![Cert-manager with SmallStep](../../../images/acme-for-kubernetes/cert-manager-with-smallstep.png "Cert-manager with SmallStep")
+![Cert-manager with SmallStep](../../../images/acme-for-kubernetes/cert-manager-with-smallstep-ca.png "Cert-manager with SmallStep")
 
 ### SmallStep CA
 

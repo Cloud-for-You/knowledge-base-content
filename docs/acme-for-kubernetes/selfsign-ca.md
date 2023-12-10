@@ -5,9 +5,9 @@ weight=2
 
 ### Postup pro vydání certifikátu
 
-![Cert-manager with SmallStep](../../../images/acme-for-kubernetes/cert-manager-with-smallstep.png "Cert-manager with SmallStep")
+![Cert-manager with SmallStep](../../../images/acme-for-kubernetes/cert-manager-with-selfsigned-ca.png "Cert-manager with SmallStep")
 
-#### Konfigurace Issuer / ClusterIssuer
+### Konfigurace Issuer / ClusterIssuer
 
 ```yaml
 [params]
