@@ -3,6 +3,7 @@ title = "Kubernetes"
 weight = 1
 +++
 
-Welcome to the Compose theme user guide! This guide shows you how to get started creating technical documentation sites using Compose, including site customization and how to use Compose's blocks and templates.
+Jednotlivé kapitoly je možné provozovat i v produkčním prostředí za předpokladu, že využijeme malé úpravu, které nemusí být v jednotlivých kapitolách popisovány. Zde se budeme věnovat prostředí pro testovací účely. Jednotlivé komponenty budeme stavět na virtuálních strojích. Jako základ pro virtualizaci slouží __Mac Mini M1__ a všechny virtuální servery jsou stavěny na architektuře arm64.
 
-{{< button "./install-theme/" "Get started now" >}}
+### Zdroje ze kterých je čerpáno
+[Kubernetes dokumentace](https://kubernetes.io/docs/home/)
