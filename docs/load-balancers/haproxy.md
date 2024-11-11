@@ -1,7 +1,7 @@
-+++
-title="HAProxy"
-weight=1
-+++
+---
+title: HAProxy
+weight: 1
+---
 
 Instalace se bude skládat ze dvou hlavních kroků.
 - instalace master serverů

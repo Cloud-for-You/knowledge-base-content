@@ -1,7 +1,7 @@
-+++
-title="SelfSign CA"
-weight=2
-+++
+---
+title: SelfSign CA
+weight: 2
+---
 
 ### Postup pro vydání certifikátu
 

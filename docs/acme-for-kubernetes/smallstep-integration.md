@@ -1,7 +1,7 @@
-+++
-title="SmallStep integration"
-weight=3
-+++
+---
+title: SmallStep integration
+weight: 3
+---
 
 ### Postup pro vydání certifikátu
 

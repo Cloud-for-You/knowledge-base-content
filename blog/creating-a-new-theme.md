@@ -1,9 +1,9 @@
-+++
-author = "Michael Henderson"
-date = 2014-09-28
-title = "Creating a New Theme"
-image = "/images/boy.jpg"
-+++
+---
+author: Michael Henderson
+date: "2014-09-28"
+image: /images/boy.jpg
+title: Creating a New Theme
+---
 
 ## Introduction
 

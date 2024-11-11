@@ -1,17 +1,20 @@
-+++
-title="Virtualizace"
-weight=1
-+++
+---
+title: Virtualizace
+weight: 1
+---
 
 Pro virtualizace je využito nástroje __multipass__, který je možné do MacOS doinstalovat pomocí __HomeBrew__. Navíc je možnost využívat cloud-init pro úpravu takto vytvářených virtuálních serverů.
 
 ### Instalace virtualizačního prostředí
+
 ```sh
 brew install multipass
 ```
 
 ### Příprava cloud-init
+
 Vytvoříme soubor s uživatelem definovanými parametry pro cloud-init
+
 ```yaml
 #cloud-config
 bootcmd:
@@ -31,6 +34,14 @@ packages:
   - curl
   - gnupg-agent
   - gpg
+
+users:
+  - name: kubeadmin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: true
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBF2sF6U91PN+gqb4lgPf8b2WMy/st8Yn6aKGct/W5f0hIaVwD7Os4OjtQSzG1OX22SSVIiT0GiM5VjjfN8pv6TM= kubeadmin
 
 runcmd:
   # Install CRI-O
@@ -104,9 +115,53 @@ write_files:
 ```
 
 ### Start VM serverů pro běh Kubernetes clusteru s upraveným cloud-init
+
+Pokud používáme multipass virtualizační technologii, je možné využít ansible a [plugin pro dynamické inventory](https://github.com/Cloud-for-You/ansible-inventory) společně se statickým inventory. Statické inventory může vypadat následovné pro 3 nodový cluster.
+```ini
+[masters]
+k8s-master01
+
+[workers]
+k8s-worker01
+k8s-worker02
+
+[k8s-hosts:children]
+masters
+workers
+```
+
+Script pro dynamické inventory využíváme z toho důvodu, aby jsme získali IP adresy VM serverů přímo z multipass a nemuseli je neustále upravovat ve statickém inventory a nebo v DNS.
+
+Playbook pro vytvoření může být následující
+```yaml
+- name: Prepare VMs for K8S cluster
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create VMs for master nodes
+      theko2fi.multipass.multipass_vm:
+        name: "{{ item }}"
+        cpus: 2
+        memory: 2G
+        disk: 20G
+        state: started
+        cloud_init: ./files/cloud-config_k8s-hosts.yaml
+      loop: "{{ groups['masters'] }}"
+
+    - name: Create VMs for worker nodes
+      theko2fi.multipass.multipass_vm:
+        name: "{{ item }}"
+        cpus: 2
+        memory: 2G
+        disk: 20G
+        state: started
+        cloud_init: ./files/cloud-config_k8s-hosts.yaml
+      loop: "{{ groups['workers'] }}"
+```
+
+Manuální vytvoření všech VM
 ```sh
 multipass launch lunar --name k8s-master --cpus 2 --disk 20G --memory 2G --cloud-init <path_file>
 multipass launch lunar --name k8s-worker01 --cpus 2 --disk 20G --memory 2G --cloud-init <path_file>
 multipass launch lunar --name k8s-worker02 --cpus 2 --disk 20G --memory 2G --cloud-init <path_file>
 ```
-

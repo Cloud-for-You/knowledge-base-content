@@ -1,7 +1,7 @@
-+++
-title = "Dokumentace"
-weight = 1
-+++
+---
+title: Dokumentace
+weight: 1
+---
 
 1. OpenShift Docs
 2. Kubernetes Docs

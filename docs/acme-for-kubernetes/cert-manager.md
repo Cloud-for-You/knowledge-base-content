@@ -1,7 +1,7 @@
-+++
-title="Cert-manager"
-weight=1
-+++
+---
+title: Cert-manager
+weight: 1
+---
 
 Controller, který sleduje Kubernetes API a na základě změn provádí definované akce.
 

@@ -1,13 +1,18 @@
-+++
-title="Instalace Kubernetes clusteru"
-weight=2
-+++
+---
+title: Instalace Kubernetes clusteru
+weight: 2
+---
 
-Instalace se bude skládat ze dvou hlavních kroků.
-- instalace master serverů
+Instalace clusteru se skádá z několika částí, které není možné vynechat 
+- instalace prvního master serveru
+- deployment síťového stacku například Calico, Cilium, OVN-Kubernetes nebo jiný
 - instalace compute serverů
 
-### Příprava konfiguračního souboru pro kubeadm
+### Instalace prvního master serveru
+Pro instalaci budeme používat **kubeadm** utilitu.
+
+###### Příprava konfiguračního souboru pro kubeadm
+Pro testovací účely nemusíme konfigurační soubory připravovat. Příprava konfiguračních souborů je vhodná pro production ready prostředí.
 
 defaulní konfiguraci je možné přípravit zadáním
 ```sh
@@ -55,4 +60,18 @@ networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
 scheduler: {}
+```
+### Deployment síťového stacku
+
+Instalace Calico overlay network
+
+### Instalace compute serverů
+
+Pro přidání compute nodů do clusteru stačí na tomto nodu spustit kubeadm utilitu
+```sh
+kubeadm join 10.211.57.20:6443 --token 1whle5.chnrsua2z9lsjolv --discovery-token-ca-cert-hash sha256:afeb03bd5f647c5144fe722c8e103cf62c8723a0e2e74d83a3f7fb4388b32652
+```
+Token má platnost pouze 24 hodin. Pokud bude potřeba přidat nový token, je možné jej vygenerovat
+```sh
+kubeadm token create --print-join-command
 ```
