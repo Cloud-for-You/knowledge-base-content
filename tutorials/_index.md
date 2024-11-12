@@ -1,5 +1,5 @@
 ---
-title: Tutorials' Docs
+title: Návody
 weight: 1
 ---
 

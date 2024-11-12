@@ -1,6 +1,6 @@
 ---
-title: HAProxy
-weight: 1
+title: Load Balancer HAProxy
+weight: 4
 ---
 
 Instalace se bude skládat ze dvou hlavních kroků.
